@@ -11,12 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -68,7 +68,7 @@ fun Qualify1Screen() {
         Box(
             modifier = Modifier
                 .padding(innerPadding)
-                .background(color = MaterialTheme.colorScheme.surface),
+                .background(color = Color.White),
         ) {
             Box(
                 modifier = Modifier.padding(
@@ -80,54 +80,18 @@ fun Qualify1Screen() {
             )
             {
                 Image(
-                    painter = painterResource(id = R.drawable.img_qualify_1_profile),
-                    contentDescription = "Profile",
-                    contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .clip(RoundedCornerShape(16.dp)),
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.5f)),
+                    painter = painterResource(id = R.drawable.img_qualify_1_profile),
+                    contentDescription = "Profile"
                 )
-                Card(
-                    modifier = Modifier.align(Alignment.BottomCenter),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.75f),
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    ),
-                    shape = RoundedCornerShape(
-                        topStart = 0.dp,
-                        topEnd = 0.dp,
-                        bottomStart = 16.dp,
-                        bottomEnd = 16.dp
-                    )
-                ) {
-                    Column(
-                        modifier = Modifier.padding(
-                            start = 20.dp,
-                            end = 20.dp,
-                            top = 20.dp,
-                            bottom = 40.dp
-                        ),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        Text(
-                            text = "John Doe",
-                            style = MaterialTheme.typography.headlineMedium,
-                        )
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_qualify_1_gender_male),
-                                contentDescription = "Male"
-                            )
-                            Text(
-                                text = "Male",
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
-                        Text(
-                            text = "Lorem ipsum dolor sit amet, cd nulla lacinia, quis fringilla lorem imperdiet. Proin in quam vel odio iaculis fringilla.",
-                            style = MaterialTheme.typography.bodyMedium,
-                        )
-                    }
-                }
+                OverlayCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.BottomCenter),
+                )
             }
             Row(
                 modifier = Modifier
@@ -137,9 +101,9 @@ fun Qualify1Screen() {
                     .align(Alignment.BottomCenter),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Button(
+                IconButton(
                     modifier = Modifier.size(120.dp, 48.dp),
-                    colors = ButtonDefaults.buttonColors(
+                    colors = IconButtonDefaults.iconButtonColors(
                         containerColor = MaterialTheme.colorScheme.errorContainer,
                         contentColor = MaterialTheme.colorScheme.onErrorContainer
                     ),
@@ -149,9 +113,9 @@ fun Qualify1Screen() {
                         contentDescription = "Thumb Down"
                     )
                 }
-                Button(
+                IconButton(
                     modifier = Modifier.size(120.dp, 48.dp),
-                    colors = ButtonDefaults.buttonColors(
+                    colors = IconButtonDefaults.iconButtonColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                     ),
@@ -162,6 +126,52 @@ fun Qualify1Screen() {
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun OverlayCard(modifier: Modifier) {
+    Card(
+        modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.75f),
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        shape = RoundedCornerShape(
+            topStart = 0.dp,
+            topEnd = 0.dp,
+            bottomStart = 16.dp,
+            bottomEnd = 16.dp
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(20.dp)
+                .padding(bottom = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = "John Doe",
+                style = MaterialTheme.typography.headlineMedium,
+            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_qualify_1_gender_male),
+                    contentDescription = "Male"
+                )
+                Text(
+                    text = "Male",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+            Text(
+                text = "Lorem ipsum dolor sit amet, cd nulla lacinia, quis fringilla lorem imperdiet. Proin in quam vel odio iaculis fringilla.",
+                style = MaterialTheme.typography.bodyMedium,
+            )
         }
     }
 }
