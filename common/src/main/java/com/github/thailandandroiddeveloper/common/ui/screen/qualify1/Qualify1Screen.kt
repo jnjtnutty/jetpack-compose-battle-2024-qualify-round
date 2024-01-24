@@ -55,7 +55,7 @@ fun Qualify1Screen() {
                     Icon(
                         modifier = Modifier.size(48.dp),
                         painter = painterResource(id = R.drawable.ic_qualify_1_profile),
-                        contentDescription = "Add Items",
+                        contentDescription = "Profile",
                         tint = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 },
